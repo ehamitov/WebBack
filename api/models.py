@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Category(models.Model):
     name = models.CharField(max_length=250)
     image = models.CharField(max_length=10000, default='No data')
@@ -19,13 +20,14 @@ class Category(models.Model):
 
         }
 
+
 class Product(models.Model):
     name = models.CharField(max_length=250)
     description = models.CharField(max_length=10000, default="No data")
     full = models.CharField(max_length=10000)
     price = models.IntegerField(default='No data')
-    image = models.CharField(max_length=10000)
-    link = models.CharField(max_length=10000)
+    image = models.CharField(max_length=10000, default='No data')
+    link = models.CharField(max_length=10000, default='No data')
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     class Meta:
         verbose_name = 'Product'
@@ -39,7 +41,7 @@ class Product(models.Model):
             'description': self.description,
             'full': self.full,
             'price': self.price,
-            'image': self.price,
+            'image': self.image,
             'link': self.link,
             'category': self.category_id,
         }

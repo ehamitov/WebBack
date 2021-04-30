@@ -6,6 +6,7 @@ from api.models import Category, Product
 class CategorySerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField()
+    image = serializers.CharField()
 
     def create(self, validated_data):
         category = Category.objects.create(name=validated_data.get('name'))
@@ -13,6 +14,7 @@ class CategorySerializer(serializers.Serializer):
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
+        instance.image = validated_data.get('image', instance.image)
         instance.save()
         return instance
 
@@ -29,7 +31,7 @@ class ProductModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ('id', 'name', 'description', 'full', 'price', 'category', 'category_id')
+        fields = ('id', 'name', 'description', 'full', 'price', 'image', 'link', 'category', 'category_id')
 
 
 class Product2ModelSerializer(serializers.ModelSerializer):
@@ -37,7 +39,7 @@ class Product2ModelSerializer(serializers.ModelSerializer):
     # category_id = serializers.IntegerField(write_only=True)
     class Meta:
         model = Product
-        fields = ('id', 'name', 'description', 'full', 'price')
+        fields = ('id', 'name', 'description', 'full', 'image', 'price')
 
 
 class CategoryWithProductModelSerializer(serializers.ModelSerializer):
@@ -45,7 +47,7 @@ class CategoryWithProductModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ('id', 'name', 'products')
+        fields = ('id', 'name', 'image', 'products')
 
 
 class ProductSerializer(serializers.Serializer):
