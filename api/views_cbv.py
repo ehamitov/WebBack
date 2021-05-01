@@ -20,7 +20,7 @@ class ProductListAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response({'error': serializer.errors}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    # permission_classes = (IsAuthenticated,)
+    #permission_classes = (IsAuthenticated,)
 
 
 class ProductDetailAPIView(APIView):
@@ -48,7 +48,7 @@ class ProductDetailAPIView(APIView):
         product.delete()
         return Response({'deleted': True})
 
-    # permission_classes = (IsAuthenticated,IsAdminUser,)
+    #permission_classes = (IsAuthenticated,IsAdminUser,)
 
 
 class ThreeCheapProductAPIView(APIView):

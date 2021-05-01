@@ -32,7 +32,7 @@ SECRET_KEY = 'kqxv*nt__7%&h64med=d*9b+^qtr3m=k494%33kjlpml1*6bae'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Application definition
 
@@ -52,14 +52,15 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-]
 
+]
+CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
@@ -130,15 +131,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 REST_FRAMEWORK = {
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    #     'rest_framework.permissions.IsAuthenticated',
-    # ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
 }
+
 
 JWT_AUTH = {
     'JWT_ENCODE_HANDLER':

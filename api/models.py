@@ -3,7 +3,7 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=250)
-    image = models.CharField(max_length=10000, default='No data')
+    image = models.TextField(max_length=10000, default='No data')
 
     class Meta:
         verbose_name = 'Category'
@@ -17,7 +17,6 @@ class Category(models.Model):
             'id': self.id,
             'name': self.name,
             'image': self.image,
-
         }
 
 
@@ -28,7 +27,7 @@ class Product(models.Model):
     price = models.IntegerField(default='No data')
     image = models.CharField(max_length=10000, default='No data')
     link = models.CharField(max_length=10000, default='No data')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     class Meta:
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
