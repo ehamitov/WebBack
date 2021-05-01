@@ -9,7 +9,7 @@ class CategorySerializer(serializers.Serializer):
     image = serializers.CharField()
 
     def create(self, validated_data):
-        category = Category.objects.create(name=validated_data.get('name'))
+        category = Category.objects.create(**validated_data)
         return category
 
     def update(self, instance, validated_data):
@@ -22,7 +22,7 @@ class CategorySerializer(serializers.Serializer):
 class CategoryModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'image')
 
 
 class ProductModelSerializer(serializers.ModelSerializer):
@@ -46,8 +46,8 @@ class CategoryWithProductModelSerializer(serializers.ModelSerializer):
     products = ProductModelSerializer(many=True, read_only=True)
 
     class Meta:
-        model = Category
-        fields = ('id', 'name', 'image', 'products')
+        model = Product
+        fields = ('id', 'name', 'image',  'price', 'description', 'category_id', 'products')
 
 
 class ProductSerializer(serializers.Serializer):
